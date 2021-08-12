@@ -47,13 +47,13 @@ function scan(fileName, pdf) {
 
   pdf.getPage(1).then(function(page) {
     let scale = 1;
-    var viewport = page.getViewport({
+    let viewport = page.getViewport({
       scale: scale,
     });
 
     scale = 2550 / viewport.width;
     pdf.getPage(1).then(function(page) {
-      var viewport = page.getViewport({
+      let viewport = page.getViewport({
         scale: scale,
       });
 
@@ -97,7 +97,7 @@ function scan(fileName, pdf) {
 
       function next() {
         pdf.getPage(i + 1).then(function(page) {
-          var viewport = page.getViewport({
+          let viewport = page.getViewport({
             scale: scale,
           });
 
@@ -110,7 +110,7 @@ function scan(fileName, pdf) {
           //
           // Render PDF page into canvas context
           //
-          var renderContext = {
+          let renderContext = {
             canvasContext: ctx,
             viewport: viewport,
           };
@@ -131,7 +131,7 @@ function scan(fileName, pdf) {
               imgs.innerHTML = '';
               url = canvas.toDataURL('image/png');
               fetch(url).then(n => n.arrayBuffer()).then(n => {
-                var spark = new SparkMD5.ArrayBuffer()
+                let spark = new SparkMD5.ArrayBuffer()
                 spark.append(n);
                 let md5 = spark.end();
                 let thisCostume = {
@@ -201,7 +201,7 @@ fileInput.addEventListener('change', () => {
     './dependencies/pdf.worker.js';
 
 
-    var loadingTask = pdfjsLib.getDocument(url);
+    let loadingTask = pdfjsLib.getDocument(url);
     loadingTask.promise.then(function(pdf) {
       setTimeout(() => {
         scan(file.name.split('.').join('_'), pdf);
