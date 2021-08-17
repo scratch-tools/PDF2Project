@@ -1,8 +1,8 @@
-# PDF2Sprite
+# PDF2Project
 
-Use PDF2Sprite to convert a PDF to a scrollabe Scratch sprite!
+Use PDF2Project to convert a PDF to a full Scratch project with a Google Docs-like interface!
 
-Combined with a basic gray background, uploading this sprite can make a user-friendly document viewer for Scratch! Just export your document to a PDF, upload to PDF2Sprite, upload the exported sprite to a Scratch project, and create the background as you please, and you will have your document converted to a Scratch project!
+Based on PDF2Sprite, PDF2Project helps save you a few steps by already adding your background, so all you have to do is upload the downloaded sb3 file to Scratch!
 
 
 Note that the dependencies folder just contains builds of various dependencies that are needed for this to work properly. The code is not my own.
