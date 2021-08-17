@@ -62,7 +62,9 @@ function scan(fileName, pdf) {
       canvas.width = viewport.width;
       canvas.height = viewport.height;
 
-      console.log(canvas.width, canvas.height)
+      console.log(canvas.width, canvas.height);
+
+      const projectJSON = {"targets":[{"isStage":true,"name":"Stage","variables":{"`jEk@4|i[#Fk?(8x)AV.-my variable":["my variable",0],"6vv2a}c@$M(l5k5Y%??3":["scroll y",-100],"`i%kbp*F[(|YAJ!]dwa-":["DISTANCE",570],"*H[%os,O3c,|LyTlT$8h":["scroll top","1"]},"lists":{},"broadcasts":{},"blocks":{},"comments":{},"currentCostume":0,"costumes":[{"assetId":"fd623c74a69f977ea384c53465adf807","name":"backdrop1","bitmapResolution":1,"md5ext":"fd623c74a69f977ea384c53465adf807.svg","dataFormat":"svg","rotationCenterX":280.99999999999994,"rotationCenterY":198.5}],"sounds":[{"assetId":"83a9787d4cb6f3b7632b4ddfebf74367","name":"pop","dataFormat":"wav","format":"","rate":44100,"sampleCount":1032,"md5ext":"83a9787d4cb6f3b7632b4ddfebf74367.wav"}],"volume":100,"layerOrder":0,"tempo":60,"videoTransparency":50,"videoState":"on","textToSpeechLanguage":null}],"monitors":[],"extensions":[],"meta":{"semver":"3.0.0","vm":"0.2.0-prerelease.20210811102104","agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"}};
       let jsonData = {
         isStage: false,
         name: fileName,
@@ -82,7 +84,7 @@ function scan(fileName, pdf) {
         volume: 100,
         visible: true,
         x: 0,
-        y: 0,
+        y: -100,
         size: size,
         direction: 90,
         draggable: false,
@@ -160,16 +162,20 @@ function scan(fileName, pdf) {
                   });
                   fetch("./assets/b2acbebd5d3fa3c824a9da5bace99d7c.svg").then(n=>n.text()).then(n=>{
                     zip.file("b2acbebd5d3fa3c824a9da5bace99d7c.svg", n);
-                    console.log(i, length);
-                    zip.file("sprite.json", JSON.stringify(jsonData).replace("<FRAME_DURATION>", '' + (delay / 100)));
-                    zip.generateAsync({
-                      type: "blob"
-                    }).then(function(content) {
-                      // see FileSaver.js
+                    fetch("./assets/fd623c74a69f977ea384c53465adf807.svg").then(n=>n.text()).then(n=>{
+                      zip.file("fd623c74a69f977ea384c53465adf807.svg", n);
+                      console.log(i, length);
+                      projectJSON.targets.push(jsonData);
+                      zip.file("project.json", JSON.stringify(projectJSON).replace("<FRAME_DURATION>", '' + (delay / 100)));
+                      zip.generateAsync({
+                        type: "blob"
+                      }).then(function(content) {
+                        // see FileSaver.js
 
-                      status.textContent = "Downloading file... Upload another if you wish!";
-                      saveAs(content, fileName + ".sprite3");
-                      hideProgressBar();
+                        status.textContent = "Downloading file... Upload another if you wish!";
+                        saveAs(content, fileName + ".sb3");
+                        hideProgressBar();
+                      });
                     });
                   });
                 } else {
