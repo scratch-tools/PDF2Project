@@ -41,7 +41,7 @@ function scan(fileName, pdf) {
   progressBarDisplay("0%");
   const createPercentFromDec = dec => Math.round(dec * 1000) / 10;
   const formatPercent = percent => " ".repeat(' 100.0%'.length - (percent + '%').length) + percent + "%";
-  status.textContent = "Scanning PDF and creating sprite... "; // + formatPercent(createPercentFromDec(0));
+  status.textContent = "Scanning PDF and creating project... "; // + formatPercent(createPercentFromDec(0));
 
   const pageCount = pdf.numPages;
 
